@@ -58,7 +58,6 @@
                 android:gravity="center_vertical"
                 android:layout_marginBottom="20dp">
 
-                <!-- 로고 이미지 (intent로 전달받은 종목) -->
                 <ImageView
                     android:id="@+id/imgStockLogo"
                     android:layout_width="55dp"
@@ -74,7 +73,6 @@
                     android:orientation="vertical"
                     android:layout_marginStart="15dp">
 
-                    <!-- intent로 전달받은 종목명 -->
                     <TextView
                         android:id="@+id/txtStockName"
                         android:layout_width="wrap_content"
@@ -84,7 +82,6 @@
                         android:textSize="20sp"
                         android:textStyle="bold" />
 
-                    <!-- intent로 전달받은 종목코드 -->
                     <TextView
                         android:id="@+id/txtStockCode"
                         android:layout_width="wrap_content"
@@ -157,7 +154,7 @@
                 android:textStyle="bold"
                 android:layout_marginBottom="15dp" />
 
-            <!-- 52주 최고/최저 -->
+            <!-- 시가 -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -168,19 +165,21 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="52주 최고"
+                    android:text="시장 시작가"
                     android:textColor="#94A3B8"
                     android:textSize="13sp" />
 
                 <TextView
+                    android:id="@+id/txtOpen"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="$199.62"
+                    android:text="-"
                     android:textColor="#FFFFFF"
                     android:textSize="14sp"
                     android:textStyle="bold" />
             </LinearLayout>
 
+            <!-- 고가 -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -191,24 +190,50 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="52주 최저"
+                    android:text="고가"
                     android:textColor="#94A3B8"
                     android:textSize="13sp" />
 
                 <TextView
+                    android:id="@+id/txtHigh"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="$124.17"
-                    android:textColor="#FFFFFF"
+                    android:text="-"
+                    android:textColor="#10B981"
                     android:textSize="14sp"
                     android:textStyle="bold" />
             </LinearLayout>
 
+            <!-- 저가 -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:layout_marginBottom="12dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="저가"
+                    android:textColor="#94A3B8"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:id="@+id/txtLow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="-"
+                    android:textColor="#EF4444"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <!-- 거래량 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="0dp"
@@ -219,38 +244,17 @@
                     android:textSize="13sp" />
 
                 <TextView
+                    android:id="@+id/txtVolume"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="52.3M"
-                    android:textColor="#FFFFFF"
-                    android:textSize="14sp"
-                    android:textStyle="bold" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="시가총액"
-                    android:textColor="#94A3B8"
-                    android:textSize="13sp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="2.78T"
+                    android:text="-"
                     android:textColor="#FFFFFF"
                     android:textSize="14sp"
                     android:textStyle="bold" />
             </LinearLayout>
         </LinearLayout>
 
-        <!-- AI 예측 버튼 (→ 분석화면으로 intent 전달) -->
+        <!-- AI 예측 버튼 -->
         <Button
             android:id="@+id/btnAIPredict"
             android:layout_width="match_parent"
