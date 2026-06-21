@@ -6,10 +6,12 @@ import android.graphics.Paint
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
+import com.bumptech.glide.Glide
 import com.github.mikephil.charting.charts.CandleStickChart
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.CandleData
@@ -32,6 +34,9 @@ data class Candle(
 
 class DetailActivity : AppCompatActivity() {
 
+    // logo.dev API 키 변수 선언
+    private val LOGO_DEV_PUBLIC_KEY = "pk_RSSkExm0R5Sbw_aw34FWSA"
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail)
@@ -44,6 +49,17 @@ class DetailActivity : AppCompatActivity() {
         val txtStockCode = findViewById<TextView>(R.id.txtStockCode)
         val txtCurrentPrice = findViewById<TextView>(R.id.txtCurrentPrice)
         val txtChangeRate = findViewById<TextView>(R.id.txtChangeRate)
+
+        // 종목 로고 (Glide + logo.dev API 13개 전종목 대응)
+        val imgStockLogo = findViewById<ImageView?>(R.id.imgStockLogo)
+        if (imgStockLogo != null) {
+            Glide.with(this)
+                .load(logoUrlFor(symbol))
+                .placeholder(android.R.drawable.ic_menu_report_image)
+                .error(android.R.drawable.ic_dialog_alert)
+                .into(imgStockLogo)
+        }
+
         val btnBack = findViewById<Button>(R.id.btnBack)
         val btnAIPredict = findViewById<Button>(R.id.btnAIPredict)
 
@@ -63,7 +79,6 @@ class DetailActivity : AppCompatActivity() {
 
         setupChart(candleChart)
 
-        // 토스 캔들 한 번 받아서 차트 + 현재가 + 지표를 모두 채운다.
         chartProgress.visibility = View.VISIBLE
         txtChartStatus.visibility = View.GONE
 
@@ -137,7 +152,6 @@ class DetailActivity : AppCompatActivity() {
         chart.isDoubleTapToZoomEnabled = true
         chart.setDrawGridBackground(false)
 
-        // 캔들을 누르면(또는 손가락을 끌면) 그 봉이 하이라이트되고 말풍선이 뜬다.
         chart.isHighlightPerTapEnabled = true
         chart.isHighlightPerDragEnabled = true
 
@@ -193,7 +207,6 @@ class DetailActivity : AppCompatActivity() {
         chart.data = CandleData(dataSet)
         chart.xAxis.valueFormatter = IndexAxisValueFormatter(candles.map { it.date })
 
-        // 캔들을 누르면 날짜 + 시/고/저/종을 보여주는 말풍선
         val marker = CandleMarkerView(this, candles, unit)
         marker.chartView = chart
         chart.marker = marker
@@ -203,7 +216,6 @@ class DetailActivity : AppCompatActivity() {
         chart.invalidate()
     }
 
-    // 6자리 숫자면 한국 종목(₩), 아니면 미국 종목($)
     private fun unit(symbol: String): String =
         if (symbol.length == 6 && symbol.all { it.isDigit() }) "₩" else "$"
 
@@ -217,5 +229,26 @@ class DetailActivity : AppCompatActivity() {
             vol >= 1_000 -> "%.1fK".format(vol / 1_000.0)
             else -> vol.toString()
         }
+    }
+
+    // 학습된 총 13개 기업 도메인 주소 매칭 함수
+    private fun logoUrlFor(symbol: String): String {
+        val domain = when (symbol.uppercase()) {
+            "AAPL" -> "apple.com"
+            "MSFT" -> "microsoft.com"
+            "GOOGL", "GOOG" -> "google.com"
+            "AMZN" -> "amazon.com"
+            "TSLA" -> "tesla.com"
+            "NVDA" -> "nvidia.com"
+            "META" -> "meta.com"
+            "005930" -> "samsung.com"
+            "000660" -> "skhynix.com"
+            "035420" -> "naver.com"
+            "035720" -> "kakaocorp.com"
+            "005380" -> "hyundai.com"
+            "051910" -> "lgchem.com"
+            else -> "example.com"
+        }
+        return "https://img.logo.dev/$domain?token=$LOGO_DEV_PUBLIC_KEY"
     }
 }

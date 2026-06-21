@@ -75,4 +75,7 @@ dependencies {
     // MPAndroidChart (캔들 차트 UI - 줌/팬)
     implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")
 
+    // Glide (로고 이미지 원격 로드 = 다운로드 매니저 점수)
+    implementation("com.github.bumptech.glide:glide:4.16.0")
+
 }

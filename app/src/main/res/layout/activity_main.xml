@@ -78,7 +78,7 @@
         android:paddingTop="5dp"
         android:paddingBottom="10dp" />
 
-    <!-- 관심 기업 리스트 (5개) -->
+    <!-- 관심 기업 리스트 (6개) -->
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -91,7 +91,7 @@
             android:paddingStart="15dp"
             android:paddingEnd="15dp">
 
-            <!-- 기업 1 - APPLE -->
+            <!-- APPLE INC. -->
             <LinearLayout
                 android:id="@+id/itemApple"
                 android:layout_width="match_parent"
@@ -105,6 +105,7 @@
                 android:focusable="true">
 
                 <ImageView
+                    android:id="@+id/imgApple"
                     android:layout_width="44dp"
                     android:layout_height="44dp"
                     android:background="#0F172A"
@@ -142,24 +143,26 @@
                     android:gravity="end">
 
                     <TextView
+                        android:id="@+id/itemApplePrice"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="$178.50"
+                        android:text="..."
                         android:textColor="#FFFFFF"
                         android:textSize="15sp"
                         android:textStyle="bold" />
 
                     <TextView
+                        android:id="@+id/itemAppleChange"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="↑ +2.45%"
-                        android:textColor="#10B981"
+                        android:text=""
+                        android:textColor="#94A3B8"
                         android:textSize="12sp"
                         android:layout_marginTop="2dp" />
                 </LinearLayout>
             </LinearLayout>
 
-            <!-- 기업 2 - SAMSUNG -->
+            <!-- 삼성전자 -->
             <LinearLayout
                 android:id="@+id/itemSamsung"
                 android:layout_width="match_parent"
@@ -173,6 +176,7 @@
                 android:focusable="true">
 
                 <ImageView
+                    android:id="@+id/imgSamsung"
                     android:layout_width="44dp"
                     android:layout_height="44dp"
                     android:background="#0F172A"
@@ -210,24 +214,26 @@
                     android:gravity="end">
 
                     <TextView
+                        android:id="@+id/itemSamsungPrice"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="₩71,200"
+                        android:text="..."
                         android:textColor="#FFFFFF"
                         android:textSize="15sp"
                         android:textStyle="bold" />
 
                     <TextView
+                        android:id="@+id/itemSamsungChange"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="↓ -0.84%"
-                        android:textColor="#EF4444"
+                        android:text=""
+                        android:textColor="#94A3B8"
                         android:textSize="12sp"
                         android:layout_marginTop="2dp" />
                 </LinearLayout>
             </LinearLayout>
 
-            <!-- 기업 3 - TESLA -->
+            <!-- TESLA INC. -->
             <LinearLayout
                 android:id="@+id/itemTesla"
                 android:layout_width="match_parent"
@@ -241,6 +247,7 @@
                 android:focusable="true">
 
                 <ImageView
+                    android:id="@+id/imgTesla"
                     android:layout_width="44dp"
                     android:layout_height="44dp"
                     android:background="#0F172A"
@@ -278,24 +285,26 @@
                     android:gravity="end">
 
                     <TextView
+                        android:id="@+id/itemTeslaPrice"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="$242.84"
+                        android:text="..."
                         android:textColor="#FFFFFF"
                         android:textSize="15sp"
                         android:textStyle="bold" />
 
                     <TextView
+                        android:id="@+id/itemTeslaChange"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="↑ +5.12%"
-                        android:textColor="#10B981"
+                        android:text=""
+                        android:textColor="#94A3B8"
                         android:textSize="12sp"
                         android:layout_marginTop="2dp" />
                 </LinearLayout>
             </LinearLayout>
 
-            <!-- 기업 4 - NVIDIA -->
+            <!-- NVIDIA CORP. -->
             <LinearLayout
                 android:id="@+id/itemNvidia"
                 android:layout_width="match_parent"
@@ -309,6 +318,7 @@
                 android:focusable="true">
 
                 <ImageView
+                    android:id="@+id/imgNvidia"
                     android:layout_width="44dp"
                     android:layout_height="44dp"
                     android:background="#0F172A"
@@ -346,24 +356,26 @@
                     android:gravity="end">
 
                     <TextView
+                        android:id="@+id/itemNvidiaPrice"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="$485.09"
+                        android:text="..."
                         android:textColor="#FFFFFF"
                         android:textSize="15sp"
                         android:textStyle="bold" />
 
                     <TextView
+                        android:id="@+id/itemNvidiaChange"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="↑ +1.78%"
-                        android:textColor="#10B981"
+                        android:text=""
+                        android:textColor="#94A3B8"
                         android:textSize="12sp"
                         android:layout_marginTop="2dp" />
                 </LinearLayout>
             </LinearLayout>
 
-            <!-- 기업 5 - KAKAO -->
+            <!-- 카카오 -->
             <LinearLayout
                 android:id="@+id/itemKakao"
                 android:layout_width="match_parent"
@@ -377,6 +389,7 @@
                 android:focusable="true">
 
                 <ImageView
+                    android:id="@+id/imgKakao"
                     android:layout_width="44dp"
                     android:layout_height="44dp"
                     android:background="#0F172A"
@@ -414,22 +427,96 @@
                     android:gravity="end">
 
                     <TextView
+                        android:id="@+id/itemKakaoPrice"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="₩48,750"
+                        android:text="..."
                         android:textColor="#FFFFFF"
                         android:textSize="15sp"
                         android:textStyle="bold" />
 
                     <TextView
+                        android:id="@+id/itemKakaoChange"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="↑ +0.31%"
-                        android:textColor="#10B981"
+                        android:text=""
+                        android:textColor="#94A3B8"
                         android:textSize="12sp"
                         android:layout_marginTop="2dp" />
                 </LinearLayout>
             </LinearLayout>
+
+            <!-- ALPHABET (GOOGLE) -->
+            <LinearLayout
+                android:id="@+id/itemGoogle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="#1E293B"
+                android:padding="18dp"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="10dp"
+                android:clickable="true"
+                android:focusable="true">
+
+                <ImageView
+                    android:id="@+id/imgGoogle"
+                    android:layout_width="44dp"
+                    android:layout_height="44dp"
+                    android:background="#0F172A"
+                    android:scaleType="centerInside"
+                    android:contentDescription="Google 로고" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:layout_marginStart="15dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="ALPHABET (GOOGLE)"
+                        android:textColor="#FFFFFF"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="GOOGL · 나스닥"
+                        android:textColor="#94A3B8"
+                        android:textSize="12sp"
+                        android:layout_marginTop="2dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="end">
+
+                    <TextView
+                        android:id="@+id/itemGooglePrice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="..."
+                        android:textColor="#FFFFFF"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/itemGoogleChange"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=""
+                        android:textColor="#94A3B8"
+                        android:textSize="12sp"
+                        android:layout_marginTop="2dp" />
+                </LinearLayout>
+            </LinearLayout>
+
 
         </LinearLayout>
     </ScrollView>
