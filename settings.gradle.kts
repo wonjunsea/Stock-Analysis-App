@@ -16,9 +16,10 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        // MPAndroidChart (캔들 차트) 전용 저장소
+        maven { url = uri("https://jitpack.io") }
     }
 }
 
 rootProject.name = "termProject"
 include(":app")
- 

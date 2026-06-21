@@ -19,11 +19,12 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
-        // ===== local.properties에서 Gemini API 키 읽어오기 =====
+        // ===== local.properties에서 API 키 읽어오기 =====
         val properties = Properties()
         properties.load(FileInputStream(rootProject.file("local.properties")))
         buildConfigField("String", "GEMINI_API_KEY", "\"${properties.getProperty("GEMINI_API_KEY")}\"")
-        buildConfigField("String", "ALPHA_API_KEY", "\"${properties.getProperty("ALPHA_API_KEY")}\"")
+        buildConfigField("String", "TOSS_CLIENT_ID", "\"${properties.getProperty("TOSS_CLIENT_ID")}\"")
+        buildConfigField("String", "TOSS_CLIENT_SECRET", "\"${properties.getProperty("TOSS_CLIENT_SECRET")}\"")
     }
 
     buildTypes {
@@ -70,5 +71,8 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.8.0")
     //이건 tensorflow 용
     implementation("org.tensorflow:tensorflow-lite:2.14.0")
+
+    // MPAndroidChart (캔들 차트 UI - 줌/팬)
+    implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")
 
 }

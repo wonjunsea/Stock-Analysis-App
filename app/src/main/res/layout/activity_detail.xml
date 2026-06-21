@@ -114,24 +114,39 @@
                 android:layout_marginTop="5dp" />
         </LinearLayout>
 
-        <!-- 차트 영역 (자리표시) -->
-        <LinearLayout
+        <!-- 차트 영역 (일봉 캔들 차트, 줌/팬 가능) -->
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="180dp"
+            android:layout_height="240dp"
             android:background="#1E293B"
             android:layout_marginStart="15dp"
             android:layout_marginEnd="15dp"
             android:layout_marginBottom="15dp"
-            android:gravity="center"
+            android:padding="10dp"
             android:elevation="4dp">
 
-            <TextView
+            <com.github.mikephil.charting.charts.CandleStickChart
+                android:id="@+id/candleChart"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <ProgressBar
+                android:id="@+id/chartProgress"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center" />
+
+            <TextView
+                android:id="@+id/txtChartStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
                 android:text="📈 주가 차트 영역"
                 android:textColor="#64748B"
-                android:textSize="14sp" />
-        </LinearLayout>
+                android:textSize="14sp"
+                android:visibility="gone" />
+        </FrameLayout>
 
         <!-- 상세 지표 -->
         <LinearLayout

@@ -1,13 +1,11 @@
 package com.example.termproject
 
-import android.content.Context
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
-import com.google.gson.annotations.SerializedName
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -15,46 +13,16 @@ import org.tensorflow.lite.Interpreter
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.Body
-import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.POST
-import retrofit2.http.Query
 import java.io.FileInputStream
 import java.nio.MappedByteBuffer
 import java.nio.channels.FileChannel
 
 // ============================================================
 //  이 파일 하나에 전부 포함:
-//  ① Alpha Vantage (주가) ② TFLite (예측) ③ Gemini (조언)
+//  ① 토스 캔들 (주가) ② TFLite (예측) ③ Gemini (조언)
 // ============================================================
-
-// ===== ① Alpha Vantage 데이터 형식 =====
-data class AlphaResponse(
-    @SerializedName("Time Series (Daily)")
-    val timeSeries: Map<String, DailyData>?
-)
-data class DailyData(
-    @SerializedName("4. close")
-    val close: String
-)
-interface AlphaService {
-    @GET("query")
-    suspend fun getDaily(
-        @Query("function") function: String = "TIME_SERIES_DAILY",
-        @Query("symbol") symbol: String,
-        @Query("apikey") apiKey: String
-    ): AlphaResponse
-}
-object AlphaApi {
-    private const val BASE_URL = "https://www.alphavantage.co/"
-    val service: AlphaService by lazy {
-        Retrofit.Builder()
-            .baseUrl(BASE_URL)
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-            .create(AlphaService::class.java)
-    }
-}
 
 // ===== ③ Gemini 데이터 형식 =====
 data class GeminiRequest(val contents: List<GContent>)
@@ -88,7 +56,6 @@ class AnalysisActivity : AppCompatActivity() {
 
     // ===== 키 설정 =====
     private val geminiKey = BuildConfig.GEMINI_API_KEY
-    private val alphaKey = BuildConfig.ALPHA_API_KEY
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -137,22 +104,15 @@ class AnalysisActivity : AppCompatActivity() {
     ) {
         lifecycleScope.launch {
             try {
-                // ===== ① Alpha Vantage로 60일치 종가 받기 =====
+                // ===== ① 토스 캔들로 60일치 종가 받기 (과거 -> 최신) =====
                 val prices = withContext(Dispatchers.IO) {
-                    val resp = AlphaApi.service.getDaily(symbol = symbol, apiKey = alphaKey)
-                    // 날짜 최신순 정렬 후 종가만 추출
-                    resp.timeSeries
-                        ?.toSortedMap(compareByDescending { it })   // 최신 날짜 먼저
-                        ?.values
-                        ?.take(60)                                  // 최근 60일
-                        ?.map { it.close.toFloat() }
-                        ?.reversed()                                // 과거→최신 순서로
-                        ?: emptyList()
+                    TossApi.fetchCandles(symbol, interval = "1d", count = 60)
+                        .mapNotNull { it.closePrice?.toFloatOrNull() }
                 }
 
                 if (prices.size < 60) {
                     txtPredicted.text = "데이터 부족"
-                    txtAdvice.text = "주가 데이터를 충분히 받지 못했습니다. (API 한도 초과일 수 있음)"
+                    txtAdvice.text = "주가 데이터를 충분히 받지 못했습니다. (토스 API 응답 ${prices.size}일)"
                     return@launch
                 }
 
